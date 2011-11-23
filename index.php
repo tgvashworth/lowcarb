@@ -1,7 +1,10 @@
+<!doctype html public "blog">
 <pre>
 <?php
 
   include("lowcarb/core/config.php");
+  include("lowcarb/core/db.php");
+  include("lowcarb/core/model.php");
   
   $config = new Config();
   
@@ -9,23 +12,14 @@
     "host" => "localhost"
   , "user" => "root"
   , "password" => "root"
+  , "db" => "lowcarb"
   );
 
-  print_r($config->db);
+  // print_r($config->db);
   
-  $config->environment("production");
+  $db = new DB($config->db);
   
-  $config->db = array(
-    "host" => "productionserver"
-  , "user" => "root"
-  , "password" => "longpassword"
-  );
   
-  print_r($config->db);
-  
-  $config->environment("development");
-
-  print_r($config->db);
 
 ?>
 </pre>

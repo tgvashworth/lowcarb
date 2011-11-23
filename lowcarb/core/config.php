@@ -24,7 +24,7 @@
      */
     function __construct($env = "development") {
       
-      $this->environment = $env;
+      $this->environment = trim($env);
       
       $this->config[$env] = array();
       
