@@ -13,20 +13,46 @@
 
   class Config {
     
+    // Allow for multiple deploy enviroments
+    private $environment;
+    
     private $config = array();
   
     /**
      *  constructor
      * 
      */
-    function __construct() {}
+    function __construct($env = "development") {
+      
+      $this->environment = $env;
+      
+      $this->config[$env] = array();
+      
+    }
+    
+    /**
+     *  changes deploy environment
+     * 
+     */
+    public function environment($env = "development") {
+      if( !array_key_exists($env, $this->config) ) {
+         $this->config[$env] = array();
+      }
+      $this->environment = $env;
+    }
     
     /**
      *  sets config property
      * 
      */ 
     public function __set($name, $value) {
-      $this->config[$name] = $value;
+      
+      if( !array_key_exists($this->environment, $this->config) ) {
+        return null;
+      }
+      
+      $this->config[$this->environment][$name] = $value;
+      
     }
     
     /**
@@ -34,8 +60,8 @@
      * 
      */
     public function __get($name) {
-      if( array_key_exists($name, $this->config) ) {
-        return $this->config[$name];
+      if( array_key_exists($name, $this->config[$this->environment]) ) {
+        return $this->config[$this->environment][$name];
       }
       return null;
     }

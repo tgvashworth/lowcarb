@@ -10,7 +10,21 @@
   , "user" => "root"
   , "password" => "root"
   );
+
+  print_r($config->db);
   
+  $config->environment("production");
+  
+  $config->db = array(
+    "host" => "productionserver"
+  , "user" => "root"
+  , "password" => "longpassword"
+  );
+  
+  print_r($config->db);
+  
+  $config->environment("development");
+
   print_r($config->db);
 
 ?>
