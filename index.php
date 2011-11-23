@@ -1,14 +1,17 @@
 <pre>
 <?php
 
-  include("lowcarb/core/uri.php");
-
-  print_r($_SERVER['REQUEST_URI']);
-  echo "\n";
+  include("lowcarb/core/config.php");
   
-  $uri = new URI();
+  $config = new Config();
   
-  print_r($uri->segments());
+  $config->db = array(
+    "host" => "localhost"
+  , "user" => "root"
+  , "password" => "root"
+  );
+  
+  print_r($config->db);
 
 ?>
 </pre>

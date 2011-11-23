@@ -7,15 +7,15 @@
    * 
    *   URI
    * 
-   *   - autoloaded on startup
+   *   autoloaded
    * 
    */
   
   class URI {
     
-    var $uri = array();
+    private $uri = array();
     
-    var $uri_string = "";
+    private $uri_string = "";
     
     /**
      *  constructor
@@ -34,7 +34,7 @@
      *  @public
      *
      */
-    function segments() {
+    public function segments() {
       
       return $this->uri;
       
@@ -44,7 +44,7 @@
      *  parses request uri into array
      * 
      */
-    function _parse_uri() {
+    private function _parse_uri() {
       
       $str = $_SERVER['REQUEST_URI'];
       
@@ -64,7 +64,7 @@
      *  cleans url string
      * 
      */
-    function _clean($str) {
+    private function _clean($str) {
       
       /** 
        * adapted from the CodeIgniter framework's URI class
