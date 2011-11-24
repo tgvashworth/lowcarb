@@ -8,15 +8,14 @@
    *   copyright (c) Tom Ashworth
    */
   
-  // Preload settings
-  $components = array("config", "uri", "db");
+  define('BOOT', true); // Stop direct script access
   
-  // Load components
+  $components = array("config", "uri", "db", "router");
+  
   foreach($components as $file) {
     require("lowcarb/" . $file . ".php");
   }
   
-  // Setup config
   $config = new Config();
   
   $config->db = array(
@@ -26,10 +25,15 @@
   , "db" => "lowcarb"
   );
   
-  // (Lazy) load database
-  $db = new DB($config->db);
+  $config->routes = array(
+    "" => "blog"
+  );
   
-  // Parse the URI
+  $db = new DB($config->db);
   $uri = new URI();
-    
+  
+  $router = new Router($config->routes);
+  
+  echo $router->match($uri->string());
+  
 ?>

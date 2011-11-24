@@ -41,6 +41,16 @@
     }
     
     /**
+     *  returns uri string
+     *
+     */
+    public function string() {
+      
+      return $this->uri_string;
+      
+    }
+    
+    /**
      *  parses request uri into array
      * 
      */
