@@ -10,7 +10,7 @@
    *   autoloaded
    * 
    */
-  
+     
   class DB {
     
     private $link, $db, $config, $connected = false;
@@ -44,6 +44,22 @@
                       or die("Could not establish connection to database.");
       $this->db = mysql_select_db($this->config["db"], $this->link)
                       or die("Could not attach to database.");
+                      
+      $this->connected = true;
+      
+    }
+    
+    /**
+     * run sql query
+     *
+     */
+    public function query($sql) {
+      
+      if( !$this->connnected ) {
+        $this->connect();
+      }
+      
+      return mysql_query($sql, $this->link);
       
     }
     
