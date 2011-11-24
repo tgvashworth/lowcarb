@@ -1,5 +1,9 @@
+<pre>
 <?php
+
+  print_r($_SERVER);
   
+  /*
   $config = new Config();
   
   $config->db = array(
@@ -14,5 +18,7 @@
   $uri = new URI();
   
   $articles = new Model("articles", $db);
+  */
   
 ?>
+</pre>
