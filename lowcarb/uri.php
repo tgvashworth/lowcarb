@@ -50,6 +50,8 @@
       
       if( isset($str) && $str !== '/' ) {
         
+        $str = strstr($str, '?', true);
+        
         $str = $this->_clean($str);
         
         $this->uri_string = $str;

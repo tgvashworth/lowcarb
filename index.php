@@ -8,52 +8,28 @@
    *   copyright (c) Tom Ashworth
    */
   
-  define('BOOT', true);
+  // Preload settings
+  $components = array("config", "uri", "db");
   
-  /**
-   * user adjustable settings
-   *
-   */
-   
-  $environment = '';
-  $autoload = array("uri", "db");
-  $system_dir = "lowcarb";
-  
-  /**
-   * lowcarb initialisation
-   *
-   */
-  
-  // check that these folders are correct
-  $system_dir = trim(trim($system_dir), '/');
-  
-  if( !is_dir($system_dir) ) {
-    exit("System folder not configured correctly.");
+  // Load components
+  foreach($components as $file) {
+    require("lowcarb/" . $file . ".php");
   }
   
-  $system_dir .= '/';
+  // Setup config
+  $config = new Config();
   
-  // load config class
-  require($system_dir . "components/config.php");
-  
-  // create new configuration object  
-  $config = new Config($environment);
-  
-  $config->system = array(
-    "lowcarb" => $system_dir
-  , "root" => $_SERVER['DOCUMENT_ROOT'] . '/'
+  $config->db = array(
+    "host" => "localhost"
+  , "user" => "root"
+  , "password" => "root"
+  , "db" => "lowcarb"
   );
   
-  // set components to be autoloaded by the application
-  $config->autoload = $autoload;
+  // (Lazy) load database
+  $db = new DB($config->db);
   
-  // load app class
-  require($system_dir . "lowcarb.php");
-  
-  // create application object
-  $lc = new Lowcarb();
-  
-  // and away we go
-  require($system_dir . "boot.php");
-  
+  // Parse the URI
+  $uri = new URI();
+    
 ?>
