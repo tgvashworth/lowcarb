@@ -1,12 +1,4 @@
-<!doctype html public "blog">
-<pre>
 <?php
-
-  include("lowcarb/core/config.php");
-  include("lowcarb/core/db.php");
-  include("lowcarb/core/uri.php");
-  include("lowcarb/mvc/model.php");
-  include("lowcarb/mvc/router.php");
   
   $config = new Config();
   
@@ -22,12 +14,5 @@
   $uri = new URI();
   
   $articles = new Model("articles", $db);
-    
-  $router = new Router($uri);
   
-  $router->add('', 'read');
-  
-  // Add controller base class, and register a controller with a route, not a view!
-    
 ?>
-</pre>
