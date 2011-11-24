@@ -19,11 +19,9 @@
   
   $articles = new Model("articles", $db);
   
-  $result = $articles->select();
+  $result = $articles->select(array("title", "id"));
     
-  while($row = mysql_fetch_array($result)) {
-    echo $row["title"] . "\n";
-  }
+  print_r($result);
   
   
 

@@ -45,18 +45,47 @@
      */
     public function select($fields = array(), $options = array()) {
       
+      $this->_process_fields($fields);
+          
+      $sql = "SELECT " . $fields
+           . " FROM " . $this->table;
+                
+      $result = $this->db->query($sql);
+      
+      return $this->_process_result($result);
+      
+    }
+    
+    /**
+     * process sql query result to array
+     *
+     */
+    private function _process_result($result) {
+      
+      $temp = array();
+      
+      while($row = mysql_fetch_array($result)) {
+        array_push($temp, $row);
+      }
+      
+      return $temp;
+      
+    }
+    
+    /**
+     * process sql query fields
+     *
+     */
+    private function _process_fields(&$fields) {
+      
       if( empty($fields) || $fields[0] == "*" ) {
         $fields = "*";
       } else {
-        $fields = implode(', ', $fields);
+        $fields = implode(", ", $fields);
       }
       
-      $sql = "SELECT " . $fields
-           . " FROM " . $this->table;
-          
-      return $this->db->query($sql);
-      
     }
+    
     
   }
   
