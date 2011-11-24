@@ -6,6 +6,7 @@
   include("lowcarb/core/db.php");
   include("lowcarb/core/uri.php");
   include("lowcarb/mvc/model.php");
+  include("lowcarb/mvc/router.php");
   
   $config = new Config();
   
@@ -18,11 +19,12 @@
   
   $db = new DB($config->db);
   
-  $articles = new Model("articles", $db);
+  $uri = new URI();
   
-  $result = $articles->select(array("title", "id"));
+  $articles = new Model("articles", $db);
     
-  print_r($result);
+  $router = new Router($uri);
+    
   
   
 
