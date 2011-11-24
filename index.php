@@ -4,7 +4,8 @@
 
   include("lowcarb/core/config.php");
   include("lowcarb/core/db.php");
-  include("lowcarb/core/model.php");
+  include("lowcarb/core/uri.php");
+  include("lowcarb/mvc/model.php");
   
   $config = new Config();
   
