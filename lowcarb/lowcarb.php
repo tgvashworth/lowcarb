@@ -3,18 +3,15 @@
   /**
    * 
    * ✧ lowcarb
-   *   super-light php blog framework
+   *   super-light php blog
    * 
    *   Lowcarb
    * 
    * 
    */
-
+   
   class Lowcarb {
     
-    // Application config
-    public $config = new Config();
-  
     /**
      *  constructor
      * 
