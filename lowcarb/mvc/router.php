@@ -31,7 +31,7 @@
      *  adds a route
      * 
      */
-    public function route($uri, $view) {
+    public function add($uri, $controller) {
       
       $uri = trim($uri);
       
@@ -44,7 +44,7 @@
       }
       
       $routes[$uri] = array();
-      $routes[$uri]["view"] = $view;
+      $routes[$uri]["controller"] = $controller;
             
     }
     

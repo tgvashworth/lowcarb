@@ -24,9 +24,10 @@
   $articles = new Model("articles", $db);
     
   $router = new Router($uri);
+  
+  $router->add('', 'read');
+  
+  // Add controller base class, and register a controller with a route, not a view!
     
-  
-  
-
 ?>
 </pre>
