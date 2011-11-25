@@ -35,26 +35,29 @@
      */
     public function match($segments) {
       
-      print_r($segments);
+      //print_r($segments);
       
-      if( empty($segments) ) return $this->routes['index'];
+      $uri = $segments;
+      
+      $function = "";
+      $arguments = $segments;
+      
+      if( empty($segments) ) {
+        return array("function" => $this->_get_route('index'), "arguments" => array());
+      }
       
       foreach($segments as &$segment) {
-        
         $segment = trim(preg_replace('/\d+/i',':num',$segment), '/');
-        
       }
       
       if( $segments[0] !== ':num' ) {
-        return $this->_get_route($segments[0]);
+        array_shift($arguments);
+        return array("function" => $this->_get_route($segments[0]), "arguments" => $arguments);
+      } else {
+        return array("function" => $this->_get_route('index'), "arguments" => $arguments);
       }
       
-      $uri = implode('/', $segments);
-      
-      print_r("URI: " . $uri);
-      
-      return $this->_get_key($uri);
-      
+      exit("Match for " . $uri . " not found.");      
     }
     
     /**

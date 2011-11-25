@@ -35,6 +35,8 @@
   
   $router = new Router($config->routes);
   
-  echo "<br/>Function: " . $router->match($uri->segments());
+  echo "Router: ";
+  print_r($router->match($uri->segments()));
+  echo "<br/>";
   
 ?>
