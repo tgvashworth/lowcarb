@@ -33,16 +33,40 @@
      * matches uri to callback
      *
      */
-    public function match($uri) {
+    public function match($segments) {
       
-      if( $uri == '' ) return $this->routes['index'];
+      print_r($segments);
       
-      $uri = ltrim(preg_replace('/\d+/i',':num',$uri), '/');
+      if( empty($segments) ) return $this->routes['index'];
       
-      if( array_key_exists($uri, $this->routes) ) {
-        return $this->routes[$uri];
+      foreach($segments as &$segment) {
+        
+        $segment = trim(preg_replace('/\d+/i',':num',$segment), '/');
+        
+      }
+      
+      if( $segments[0] !== ':num' ) {
+        return $this->_get_route($segments[0]);
+      }
+      
+      $uri = implode('/', $segments);
+      
+      print_r("URI: " . $uri);
+      
+      return $this->_get_key($uri);
+      
+    }
+    
+    /**
+     *  gets route value
+     * 
+     */
+    private function _get_route($key) {
+      
+      if( array_key_exists($key, $this->routes) ) {
+        return $this->routes[$key];
       } else {
-        exit("Route " . $uri . " not found.");
+        exit("Route " . $key . " not found.");
       }
       
     }

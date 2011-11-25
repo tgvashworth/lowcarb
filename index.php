@@ -26,9 +26,8 @@
   );
   
   $config->routes = array(
-    "" => "blog"
-  , ":num/:num/:num" => "post"
-  , "edit/:num" => "edit"
+    "" => "index"
+  , "edit" => "edit"
   );
   
   $db = new DB($config->db);
@@ -36,6 +35,6 @@
   
   $router = new Router($config->routes);
   
-  echo $router->match($uri->string());
+  echo "<br/>Function: " . $router->match($uri->segments());
   
 ?>
