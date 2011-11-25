@@ -35,8 +35,6 @@
      */
     public function match($segments) {
       
-      //print_r($segments);
-      
       $uri = $segments;
       
       $function = "";
@@ -53,11 +51,12 @@
       if( $segments[0] !== ':num' ) {
         array_shift($arguments);
         return array("function" => $this->_get_route($segments[0]), "arguments" => $arguments);
-      } else {
+      } elseif( $segments[0] == ':num' ) {
         return array("function" => $this->_get_route('index'), "arguments" => $arguments);
       }
       
-      exit("Match for " . $uri . " not found.");      
+      return array("function" => $this->_get_route('error'), "arguments" => $arguments);
+      
     }
     
     /**
@@ -69,7 +68,7 @@
       if( array_key_exists($key, $this->routes) ) {
         return $this->routes[$key];
       } else {
-        exit("Route " . $key . " not found.");
+        return 'error';
       }
       
     }
