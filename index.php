@@ -27,6 +27,8 @@
   
   $config->routes = array(
     "" => "blog"
+  , ":num/:num/:num" => "post"
+  , "edit/:num" => "edit"
   );
   
   $db = new DB($config->db);

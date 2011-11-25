@@ -37,9 +37,13 @@
       
       if( $uri == '' ) return $this->routes['index'];
       
-      $uri = preg_replace('\d+',':num',$segment);
+      $uri = ltrim(preg_replace('/\d+/i',':num',$uri), '/');
       
-      return $uri;
+      if( array_key_exists($uri, $this->routes) ) {
+        return $this->routes[$uri];
+      } else {
+        exit("Route " . $uri . " not found.");
+      }
       
     }
     

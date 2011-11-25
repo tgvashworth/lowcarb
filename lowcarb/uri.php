@@ -60,7 +60,7 @@
       
       if( isset($str) && $str !== '/' ) {
         
-        $str = strstr($str, '?', true);
+        //$str = strstr($str, '?');
         
         $str = $this->_clean($str);
         
