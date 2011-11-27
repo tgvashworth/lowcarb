@@ -5,13 +5,12 @@
    * ✧ lowcarb
    *   super-light php blog framework
    * 
-   *   Controller
+   *   Blog controller
    * 
-   *   autoloaded
    * 
    */
   
-  class Controller {
+  class Blog extends Controller {
     
     /**
      *  constructor
@@ -19,11 +18,13 @@
      */
     function __construct() {
       
+      parent::__construct();
+      
     }
     
-    public function error() {
+    public function index($year, $month) {
       
-      echo "404 Error. Ain't no such page, sorry.";
+      echo $year . '/' . $month;
       
     }
     
