@@ -10,7 +10,7 @@
   
   define('BOOT', true); // Stop direct script access
   
-  $components = array("config", "uri", "db", "router", "controller", "blog");
+  $components = array("config", "store", "uri", "db", "router", "controller", "model");
   
   foreach($components as $file) {
     require("lowcarb/" . $file . ".php");
@@ -39,12 +39,16 @@
   
   $route = $router->match($uri->segments());
   
-  $blog = new Blog();
+  $model = new Store();
   
-  if( method_exists($blog, $route['function']) ) {
+  $model->articles = new Model('articles', $db);
+  
+  $controller = new Controller($model);
+  
+  if( method_exists($controller, $route['function']) ) {
     
     // This is nasty nasty nasty, but PHP is PHP.
-    call_user_func_array(array($blog, $route['function']), $route['arguments']);
+    call_user_func_array(array($controller, $route['function']), $route['arguments']);
     
   } else {
     

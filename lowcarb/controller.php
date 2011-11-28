@@ -13,11 +13,31 @@
   
   class Controller {
     
+    private $model;
+    
     /**
      *  constructor
      * 
      */
-    function __construct() {
+    function __construct($model) {
+      
+      $this->model = $model;
+      
+    }
+    
+    public function index($year, $month) {
+      
+      print_r($year . "/" . $month);
+      
+      $result = $this->model->articles->select();
+      
+      echo "<br/>";
+      print_r($result);
+      echo "<br/>";
+      
+      foreach($result as $article) {
+        echo $article['title'];
+      }
       
     }
     
