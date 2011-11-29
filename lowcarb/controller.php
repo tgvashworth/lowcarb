@@ -25,19 +25,11 @@
       
     }
     
-    public function index($year, $month) {
+    public function index() {
+            
+      $articles = $this->model->articles->select();
       
-      print_r($year . "/" . $month);
-      
-      $result = $this->model->articles->select();
-      
-      echo "<br/>";
-      print_r($result);
-      echo "<br/>";
-      
-      foreach($result as $article) {
-        echo $article['title'];
-      }
+      $this->view($articles);
       
     }
     
@@ -45,21 +37,21 @@
       
       $this->model->articles->_process_name($name);
       
-      $result = $this->model->articles->select(array("name" => $name));
+      $articles = $this->model->articles->select(array("name" => $name));
       
-      echo "<br/>";
-      print_r($result);
-      echo "<br/>";
-      
-      foreach($result as $article) {
-        echo $article['title'];
-      }
+      $this->view($articles);
       
     }
     
     public function error() {
       
       echo "404 Error. Ain't no such page, sorry.";
+      
+    }
+    
+    private function view($articles) {
+      
+      include("lowcarb/view/main.php");
       
     }
     

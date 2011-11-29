@@ -51,11 +51,10 @@
           
       $sql = "SELECT " . $fields
            . " FROM " . $this->table
-           . " " . $options;
+           . " " . $options
+           . " ORDER BY date DESC";
           
       $result = $this->db->query($sql);
-      
-      print $sql;
       
       return $this->_process_result($result);
       
