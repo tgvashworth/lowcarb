@@ -27,7 +27,7 @@
   
   $config->routes = array(
     "" => "index"
-  , "edit" => "edit"
+  , "on" => "on"
   , "error" => "error"
   );
   

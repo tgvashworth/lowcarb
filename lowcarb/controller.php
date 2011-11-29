@@ -41,6 +41,22 @@
       
     }
     
+    public function on($name) {
+      
+      $this->model->articles->_process_name($name);
+      
+      $result = $this->model->articles->select(array("name" => $name));
+      
+      echo "<br/>";
+      print_r($result);
+      echo "<br/>";
+      
+      foreach($result as $article) {
+        echo $article['title'];
+      }
+      
+    }
+    
     public function error() {
       
       echo "404 Error. Ain't no such page, sorry.";

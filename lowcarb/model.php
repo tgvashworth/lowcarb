@@ -46,11 +46,16 @@
     public function select($options = array(), $fields = array()) {
       
       $this->_process_fields($fields);
+      
+      $this->_process_options($options);
           
       $sql = "SELECT " . $fields
-           . " FROM " . $this->table;
-                
+           . " FROM " . $this->table
+           . " " . $options;
+          
       $result = $this->db->query($sql);
+      
+      print $sql;
       
       return $this->_process_result($result);
       
@@ -83,6 +88,42 @@
       } else {
         $fields = implode(", ", $fields);
       }
+      
+    }
+    
+    /**
+     * process sql query options
+     *
+     */
+    private function _process_options(&$options) {
+      
+      $temp = "WHERE ";
+      
+      if( empty($options) ) {
+        $options = "";
+        return null;
+      } else {
+        $count = 0;
+        foreach($options as $field => $value) {
+          if($count > 0) {
+            $temp .= " AND";
+          }
+          $temp .= " " . $field . "='" . mysql_real_escape_string(stripslashes($value)) . "'";
+          $count += 1;
+        }
+      }
+      
+      $options = $temp;
+      
+    }
+    
+    /**
+     * turn post title into stored name
+     *
+     */
+    public function _process_name(&$name) {
+      
+      $name = strtolower(str_replace('%20', '-', $name));
       
     }
     
