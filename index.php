@@ -16,7 +16,9 @@
     require("lowcarb/" . $file . ".php");
   }
   
-  $config = new Config();
+  $config = new Config(); // Meh, globals.
+  
+  $config->url = "//blog.dev/";
   
   $config->db = array(
     "host" => "localhost"
@@ -43,7 +45,7 @@
   
   $model->articles = new Model('articles', $db);
   
-  $controller = new Controller($model);
+  $controller = new Controller($model, $config->url);
   
   if( method_exists($controller, $route['function']) ) {
     

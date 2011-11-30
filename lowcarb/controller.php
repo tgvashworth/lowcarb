@@ -13,15 +13,16 @@
   
   class Controller {
     
-    private $model;
+    private $model, $url;
     
     /**
      *  constructor
      * 
      */
-    function __construct($model) {
+    function __construct($model, $url) {
       
       $this->model = $model;
+      $this->url = $url;
       
     }
     
@@ -50,7 +51,7 @@
     }
     
     private function view($articles) {
-      
+            
       include("lowcarb/view/main.php");
       
     }
