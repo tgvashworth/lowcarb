@@ -51,8 +51,8 @@ body, button, input, select, textarea { font-family: sans-serif; color: #222; }
    Links
    ========================================================================== */
 
-a { color: #00e; }
-a:visited { color: #551a8b; }
+a { color: hsl(184, 51%, 66%); }
+a:visited { color: hsl(184, 51%, 66%); }
 a:hover { color: #06e; }
 a:focus { outline: thin dotted; }
 
@@ -213,9 +213,13 @@ body {
   color: #666;
 }
 
+input, textarea {
+  font: 100%/1.5 ratio, sans-serif;
+}
+
 a, a:visited {
-  color: hsla(184, 51%, 66%, 1);
-  -webkit-transition: all 0.2s linear;
+  color: hsl(184, 51%, 66%);
+  -webkit-transition: color 0.2s linear;
   text-decoration: none;
 }
   a:hover {
@@ -248,8 +252,35 @@ article {
     }
 
 
-
-
+/* /write styles */
+div[role=field] {
+  margin-bottom: 1em;
+}
+  label {
+    font-style: italic;
+    width: 2em;
+    display: block;
+    float: left;
+    padding-top: 0.3em;
+  }
+  input, textarea {
+    padding: 0.2em 0.4em;
+  }
+  textarea {
+    margin-left: 2em;
+  }
+  input[type=submit] {
+    position: relative;
+    margin-left: 2em;
+    background: #fafafa;
+    border: none;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+    border: 1px solid rgba(0,0,0,0.2);
+  }
+    input[type=submit]:hover {
+      top: 1px;
+      box-shadow: inset 0 0 1px rgba(0,0,0,0.2);
+    }
 
 
 

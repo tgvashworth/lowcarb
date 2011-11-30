@@ -30,7 +30,7 @@
             
       $articles = $this->model->articles->select();
       
-      $this->view($articles);
+      $this->view('main',array("articles"=>$articles));
       
     }
     
@@ -40,7 +40,13 @@
       
       $articles = $this->model->articles->select(array("name" => $name));
       
-      $this->view($articles);
+      $this->view('main', array("articles"=>$articles));
+      
+    }
+    
+    public function write() {
+      
+      $this->view('write');
       
     }
     
@@ -50,9 +56,9 @@
       
     }
     
-    private function view($articles) {
-            
-      include("lowcarb/view/main.php");
+    private function view($view, $data = array()) {
+      
+      include("lowcarb/view/".$view.".php");
       
     }
     

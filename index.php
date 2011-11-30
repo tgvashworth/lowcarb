@@ -30,6 +30,7 @@
   $config->routes = array(
     "" => "index"
   , "on" => "on"
+  , "write" => "write"
   , "error" => "error"
   );
   
