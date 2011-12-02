@@ -28,7 +28,29 @@
     }
     
     /**
-     * get posted data
+     * get all posted data
+     *
+     * @param mixed $name 
+     * @return cleaned data, or null
+     * @author Tom Ashworth
+     */
+    public function get() {
+      return $this->_clean($this->data);
+    }
+    
+    /**
+     * get all posted data
+     *
+     * @param mixed $name 
+     * @return cleaned data, or null
+     * @author Tom Ashworth
+     */
+    public function sent() {
+      return !empty($this->data);
+    }
+    
+    /**
+     * get specific posted data
      *
      * @param mixed $name 
      * @return cleaned data, or null
@@ -38,7 +60,21 @@
       if( array_key_exists($name, $this->data) ) {
         return $this->_clean($this->data[$name]);
       }
-      return null;
+      return false;
+    }
+    
+    /**
+     * check data was posted
+     *
+     * @param mixed $name 
+     * @return boolean
+     * @author Tom Ashworth
+     */
+    public function __isset($name) {
+      if( array_key_exists($name, $this->data) ) {
+        return true;
+      }
+      return false;
     }
    
     /**

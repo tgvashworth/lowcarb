@@ -36,7 +36,7 @@
     
     public function on($name) {
       
-      $this->model->articles->_process_name($name);
+      $this->model->articles->process_name($name);
       
       $articles = $this->model->articles->select(array("name" => $name));
       
@@ -45,14 +45,36 @@
     }
     
     public function write() {
-                  
-      if( $this->model->post->test == 1 ) {
+      
+      $errors = array();
+      
+      if( $this->model->post->sent() ) {
        
-        // Data was posted
+        if( !$this->model->post->title ) array_push($errors, "This post did not have a title.");
+        if( !$this->model->post->content ) array_push($errors, "This post did not have any content.");
+       
+        if( empty($error) ) {
+
+          $data = $this->model->post->get();
+          $name = $this->model->post->title;
+          $this->model->articles->process_name($name);
+          
+          $data["name"] = $name;
+          
+          $this->model->articles->insert($data);
+          
+          header("Location: /");
+
+        }
         
       }
       
-      $this->view('write');
+      $data = array(
+        "title" => $this->model->post->title,
+        "content" => $this->model->post->content
+      );
+      
+      $this->view('write',$data,$errors);
       
     }
     
@@ -62,7 +84,7 @@
       
     }
     
-    private function view($view, $data = array()) {
+    private function view($view, $data = array(), $errors = array()) {
       
       include("lowcarb/view/".$view.".php");
       

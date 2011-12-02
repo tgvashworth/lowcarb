@@ -61,6 +61,34 @@
     }
     
     /**
+     * run insert query 
+     *
+     */
+    public function insert($fields = array()) {
+      
+      if( empty($fields) ) return false;
+      
+      $columns = array();
+      $values = array();
+      
+      foreach($fields as $field => $value) {
+        
+        array_push($columns, mysql_real_escape_string($field));
+        array_push($values, mysql_real_escape_string($value));
+        
+      }
+                
+      $sql = "INSERT INTO " . $this->table
+           . " (" . implode($columns, ', ') . ") "
+           . " VALUES ('" . implode($values, "', '") ."')";
+           
+      $this->db->query($sql);
+            
+      return true;
+      
+    }
+    
+    /**
      * process sql query result to array
      *
      */
@@ -120,9 +148,9 @@
      * turn post title into stored name
      *
      */
-    public function _process_name(&$name) {
+    public function process_name(&$name) {
       
-      $name = strtolower(str_replace('%20', '-', $name));
+      $name = strtolower(str_replace(array("%20", " "), '-', $name));
       
     }
     
