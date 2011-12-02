@@ -45,6 +45,12 @@
     }
     
     public function write() {
+                  
+      if( $this->model->post->test == 1 ) {
+       
+        // Data was posted
+        
+      }
       
       $this->view('write');
       

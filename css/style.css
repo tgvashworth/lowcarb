@@ -276,6 +276,7 @@ div[role=field] {
     border: none;
     box-shadow: 0 1px 1px rgba(0,0,0,0.2);
     border: 1px solid rgba(0,0,0,0.2);
+    color: #666;
   }
     input[type=submit]:hover {
       top: 1px;
