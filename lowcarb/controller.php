@@ -30,6 +30,8 @@
             
       $articles = $this->model->articles->select();
       
+      $this->_parse_date($articles);
+      
       $this->view('main',array("articles"=>$articles));
       
     }
@@ -39,6 +41,8 @@
       $this->model->articles->process_name($name);
       
       $articles = $this->model->articles->select(array("name" => $name));
+      
+      $this->_parse_date($articles);
       
       $this->view('main', array("articles"=>$articles));
       
@@ -88,6 +92,14 @@
       
       include("lowcarb/view/".$view.".php");
       
+    }
+    
+    private function _parse_date(&$articles) {
+      foreach($articles as &$article) {
+        $t = explode(' ', $article['date']);
+        $t = implode('-', array_reverse(explode('-', $t[0])));
+        $article['date'] = $t;
+      }
     }
     
   }
