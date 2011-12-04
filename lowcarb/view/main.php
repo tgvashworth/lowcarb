@@ -11,3 +11,5 @@
     </article>
   
   <? endforeach; ?>
+  
+<? include("footer.php"); ?>

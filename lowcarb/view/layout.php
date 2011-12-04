@@ -11,6 +11,9 @@
   <link rel=stylesheet href=<?=$this->url?>css/style.css>
   
 <body>
-  <header role=masthead>
-    <h1><a href=/>a blog.</a></h1>
-  </header>
+  
+  <div class="container">
+  
+    <header role=masthead>
+      <h1><a href=/>a blog.</a></h1>
+    </header>

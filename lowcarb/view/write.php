@@ -27,3 +27,5 @@
       <input type=submit value=publish>
     </div>
   </form>
+  
+<? include("footer.php"); ?>

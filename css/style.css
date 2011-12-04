@@ -209,8 +209,8 @@ td { vertical-align: top; }
 
 body {
   font: 100%/1.5 ratio, sans-serif;
-  padding: 0 1.7em 8em;
   color: #666;
+  background: #f8f8f8;
 }
 
 input, textarea {
@@ -230,8 +230,17 @@ h1, h2 {
   font-weight: 200;
 }
 
+.container {
+  background: white;
+  padding: 1em 1.7em 8em;
+  width: 45%;
+}
+
 header {
 }
+  header h1 {
+    margin-top: 0;
+  }
   header a, header a:visited {
     color: hsl(336, 69%, 77%);
   }
@@ -242,7 +251,8 @@ header {
 article {
 }
   article h2 {
-    font-size: 4em;
+    font-size: 3em;
+    margin-bottom: 0.2em;
   }
   article p a {
     border-bottom: 0.1em solid hsla(184, 51%, 66%, 0);
@@ -309,7 +319,6 @@ div[role=field] {
 @media only screen and (min-width: 768px) {
   /* Style adjustments for viewports 768px and over go here */
   body {
-    width: 70%;
     font: 130%/1.5 ratio, sans-serif;
   }
 }
