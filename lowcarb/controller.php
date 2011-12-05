@@ -50,6 +50,8 @@
     
     public function write() {
       
+      $this->model->auth->filter(PERMISSION_ELEVATED);
+      
       $errors = array();
       
       if( $this->model->post->sent() ) {
@@ -96,9 +98,8 @@
     
     private function _parse_date(&$articles) {
       foreach($articles as &$article) {
-        $t = explode(' ', $article['date']);
-        $t = implode('-', array_reverse(explode('-', $t[0])));
-        $article['date'] = $t;
+        $t = strtotime($article['date']);
+        $article['date'] = date('d M Y', $t);
       }
     }
     

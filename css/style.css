@@ -262,13 +262,10 @@ article {
       border-bottom-color: hsla(184, 51%, 66%, 1);
     }
   article aside {
-    background: white;
     position: absolute;
     right: -42%;
     top: 1em;
     width: 30%;
-    text-align: right;
-    padding: 1em;
     color: #ccc;
   }
 
