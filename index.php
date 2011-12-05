@@ -21,6 +21,7 @@
   // Site Configuration
   $config = new Config();
   $config->url = "//blog.dev/";
+  $config->salt = "cardiffschoolofcomputerscience";
   $config->db = array(
     "host" => "localhost"
   , "user" => "root"
@@ -30,7 +31,7 @@
   $config->routes = array(
     "" => "index"
   , "on" => "on"
-  , "write" => "write"
+  , "write" => "authenticate"
   , "error" => "error"
   );
   
@@ -55,10 +56,10 @@
   define('PERMISSION_NONE', 0);
   define('PERMISSION_USER', 2);
   define('PERMISSION_ELEVATED', 5);
-  $model->auth = new Auth('users', $db);
+  $model->auth = new Auth($config->salt, 'users', $db);
   
   // Controller
-  $controller = new Controller($model, $config->url);
+  $controller = new Controller($model, $config->url, $uri);
   
   // And away we goes...
   if( method_exists($controller, $route['function']) ) {

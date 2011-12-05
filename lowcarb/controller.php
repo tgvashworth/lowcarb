@@ -13,16 +13,17 @@
   
   class Controller {
     
-    private $model, $url;
+    private $model, $url, $uri;
     
     /**
      *  constructor
      * 
      */
-    function __construct($model, $url) {
+    function __construct($model, $url, $uri) {
       
       $this->model = $model;
       $this->url = $url;
+      $this->uri = $uri;
       
     }
     
@@ -48,9 +49,48 @@
       
     }
     
-    public function write() {
+    public function authenticate() {
       
-      $this->model->auth->filter(PERMISSION_ELEVATED);
+      if( ! $this->model->auth->filter(PERMISSION_USER, false) ) {
+        
+        $errors = array();
+        
+        if( $this->model->post->sent() ) {
+          
+          if( !$this->model->post->name ) array_push($errors, "Please supply your name.");
+          if( !$this->model->post->password ) array_push($errors, "Please supply a password.");
+
+          if( empty($errors) ) {
+
+            if( $this->model->auth->user($this->model->post->name, $this->model->post->password) ) {
+              
+              header("Location: " . $this->uri->string());
+              
+            } else {
+              
+              array_push($errors, "Name & password not recognised.");
+              
+            }
+
+          }
+
+        }
+
+        $data = array(
+          "name" => $this->model->post->name
+        );
+        
+        $this->view('login',$data, $errors);
+        
+      } else {
+        
+        $this->write();
+        
+      }
+      
+    }
+    
+    public function write() {
       
       $errors = array();
       
@@ -59,7 +99,7 @@
         if( !$this->model->post->title ) array_push($errors, "This post did not have a title.");
         if( !$this->model->post->content ) array_push($errors, "This post did not have any content.");
        
-        if( empty($error) ) {
+        if( empty($errors) ) {
 
           $data = $this->model->post->get();
           $name = $this->model->post->title;
@@ -92,7 +132,7 @@
     
     private function view($view, $data = array(), $errors = array()) {
       
-      include("lowcarb/view/".$view.".php");
+      include("lowcarb/view/layout.php");
       
     }
     

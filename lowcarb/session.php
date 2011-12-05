@@ -19,9 +19,7 @@
      * 
      */ 
     public function __set($name, $value) {
-      if( !array_key_exists($name, $_SESSION) ) {
-        $_SESSION[$name] = $value;
-      }
+      $_SESSION[$name] = $value;
     }
     
     /**
