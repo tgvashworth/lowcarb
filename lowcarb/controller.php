@@ -51,26 +51,30 @@
     
     public function authenticate() {
       
-      if( ! $this->model->auth->filter(PERMISSION_USER, false) ) {
+      // Filter non-authenticatd users
+      if( ! $this->model->auth->filter(PERMISSION_ELEVATED, false) ) {
         
         $errors = array();
         
+        // Has the user tried to log in?
         if( $this->model->post->sent() ) {
           
+          // Missing information errors
           if( !$this->model->post->name ) array_push($errors, "Please supply your name.");
           if( !$this->model->post->password ) array_push($errors, "Please supply a password.");
 
           if( empty($errors) ) {
 
+            // Try to authenticate user
             if( $this->model->auth->user($this->model->post->name, $this->model->post->password) ) {
               
               header("Location: " . $this->uri->string());
               
-              
-              array_push($errors, "Name & password not recognised.");
-              
             }
-
+            
+            // Error :|  
+            array_push($errors, "Name & password not recognised.");
+              
           }
 
         }
@@ -79,6 +83,7 @@
           "name" => $this->model->post->name
         );
         
+        // Show login form
         $this->view('login',$data, $errors);
         
       } else {
