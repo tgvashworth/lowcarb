@@ -128,6 +128,14 @@
       
     }
     
+    public function out() {
+      
+      $this->model->auth->out();
+      
+      header("Location: /");
+      
+    }
+    
     public function error() {
       
       echo "404 Error. Ain't no such page, sorry.";

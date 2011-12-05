@@ -10,6 +10,9 @@
   
   define('BOOT', true); // Stop direct script access
   
+  error_log(date('r'));
+
+  
   // Load components of the blog
   $components = array("config", "store", "uri", "db",
                       "router", "controller", "model",
@@ -32,6 +35,7 @@
     "" => "index"
   , "on" => "on"
   , "write" => "authenticate"
+  , "logout" => "out"
   , "error" => "error"
   );
   
@@ -63,6 +67,10 @@
   
   // And away we goes...
   if( method_exists($controller, $route['function']) ) {
+    
+    // Debuggin'
+    $buf = "Req: " . $route['function'];
+    error_log($buf);
     
     // This is nasty nasty nasty, but PHP is PHP.
     call_user_func_array(array($controller, $route['function']), $route['arguments']);
