@@ -1,4 +1,3 @@
-<? include("layout.php"); ?>
 
   <? if(!empty($errors)): ?>
   <div class="error">
@@ -28,4 +27,3 @@
     </div>
   </form>
   
-<? include("footer.php"); ?>

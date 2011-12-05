@@ -17,3 +17,7 @@
     <header role=masthead>
       <h1><a href=/>a blog.</a></h1>
     </header>
+    
+    <?php include($view . ".php"); ?>
+    
+  </div>

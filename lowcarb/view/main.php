@@ -1,4 +1,3 @@
-<? include("layout.php"); ?>
 
   <? $articles = $data['articles']; ?>
   
@@ -15,4 +14,3 @@
   
   <? endforeach; ?>
   
-<? include("footer.php"); ?>
