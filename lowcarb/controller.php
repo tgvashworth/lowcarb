@@ -66,7 +66,6 @@
               
               header("Location: " . $this->uri->string());
               
-            } else {
               
               array_push($errors, "Name & password not recognised.");
               
