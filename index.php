@@ -11,7 +11,9 @@
   define('BOOT', true); // Stop direct script access
   
   // Load components of the blog
-  $components = array("config", "store", "uri", "db", "router", "controller", "model", "input");
+  $components = array("config", "store", "uri", "db",
+                      "router", "controller", "model",
+                      "input", "auth", "session");
   foreach($components as $file) {
     require("lowcarb/" . $file . ".php");
   }
@@ -48,6 +50,12 @@
   
   // Input ($_POST) - stored as a model
   $model->post = new Input($_POST);
+  
+  // Authentication
+  define('PERMISSION_NONE', 0);
+  define('PERMISSION_USER', 2);
+  define('PERMISSION_ELEVATED', 5);
+  $model->auth = new Auth('users', $db);
   
   // Controller
   $controller = new Controller($model, $config->url);
