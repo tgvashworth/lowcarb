@@ -16,7 +16,7 @@
   // Load components of the blog
   $components = array("config", "store", "uri", "db",
                       "router", "controller", "model",
-                      "input", "auth", "session");
+                      "input", "auth", "session", "minidown");
   foreach($components as $file) {
     require("lowcarb/" . $file . ".php");
   }
@@ -62,6 +62,9 @@
   define('PERMISSION_ELEVATED', 5);
   $model->auth = new Auth($config->salt, 'users', $db);
   
+  // Minidown
+  $model->md = new Minidown();
+  
   // Controller
   $controller = new Controller($model, $config->url, $uri);
   
@@ -70,6 +73,10 @@
     
     // Debuggin'
     $buf = "Req: " . $route['function'];
+    if( $model->post->sent() ) {
+      $buf .= "\nPOST:";
+      $buf .= print_r($_POST, true);
+    }
     error_log($buf);
     
     // This is nasty nasty nasty, but PHP is PHP.

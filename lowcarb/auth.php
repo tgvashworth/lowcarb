@@ -10,14 +10,17 @@
    *   autoloaded
    * 
    */
-
   class Auth {
     
     private $session, $salt, $table, $db, $started = false;
     
     /**
-     *  constructor
-     * 
+     * set up auth library
+     *
+     * @param string $salt 
+     * @param string $table 
+     * @param string $db 
+     * @author Tom Ashworth
      */
     function __construct($salt, $table, $db) {
       
@@ -27,15 +30,24 @@
       
     }
     
+    /**
+     * attempt to log user in
+     *
+     * @param string $name 
+     * @param string $password 
+     * @return bool
+     * @author Tom Ashworth
+     */
     public function user($name, $password) {
       
       if( !$this->started ) {
         $this->_start();
-        
       }
       
       $name = preg_replace("/[^a-zA-Z]/i", '', $name);
-      $password = $this->_encrypt($password . $this->salt);
+      $password = $this->_encrypt($password);
+      
+      error_log("Trying " . $password);
       
       $sql = " SELECT * FROM " . $this->table
            . " WHERE name='" . mysql_real_escape_string($name) . "'"
@@ -57,6 +69,14 @@
       
     }
     
+    /**
+     * check if user has require permissions
+     *
+     * @param string $level 
+     * @param string $redirect 
+     * @return bool
+     * @author Tom Ashworth
+     */
     public function filter($level, $redirect) {
       
       if( !$this->started ) {
@@ -79,11 +99,23 @@
       
     }
     
+    /**
+     * log user out
+     *
+     * @return void
+     * @author Tom Ashworth
+     */
     public function out() {
       $this->_end(false);
       error_log("Logout level: " . $this->session->level);
     }
     
+    /**
+     * begin new sessions
+     *
+     * @return void
+     * @author Tom Ashworth
+     */
     private function _start() {
       $this->session = new Session();
       
@@ -93,6 +125,12 @@
       if( !$this->session->level ) $this->session->level = 0;
     }
     
+    /**
+     * reset authentication session data, redirect home if required
+     *
+     * @return void
+     * @author Tom Ashworth
+     */
     private function _end($redirect) {
       if( !$this->started ) {
         $this->_start();
@@ -119,12 +157,16 @@
       
     }
     
+    /**
+     * encrypt string
+     *
+     * @param string $string 
+     * @return string
+     * @author Tom Ashworth
+     */
     private function _encrypt($string) {
-      
-      return base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($this->salt), $string, MCRYPT_MODE_CBC, md5(md5($this->salt))));
-      
+      return sha1($string . $this->salt);
     }
-    
     
   }
   

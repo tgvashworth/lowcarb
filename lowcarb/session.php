@@ -13,6 +13,11 @@
 
   class Session {
     
+    /**
+     * start session
+     *
+     * @author Tom Ashworth
+     */
     function __construct() {
       session_start();
     }

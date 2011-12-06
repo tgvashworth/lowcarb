@@ -94,7 +94,11 @@
         
       } else {
         
-        $data = filter_var($data, FILTER_SANITIZE_STRING);
+        $bad = array("script", "object", "embed");
+        
+        foreach($bad as $tag) {
+          $data = str_replace(array("<".$tag, "</".$tag.">"), '', $data);
+        }
         
       }
       

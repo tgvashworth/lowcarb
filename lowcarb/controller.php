@@ -31,7 +31,7 @@
             
       $articles = $this->model->articles->select();
       
-      $this->_parse_date($articles);
+      $this->_process_articles($articles);
       
       $this->view('main',array("articles"=>$articles));
       
@@ -43,9 +43,17 @@
       
       $articles = $this->model->articles->select(array("name" => $name));
       
-      $this->_parse_date($articles);
+      $this->_process_articles($articles);
       
       $this->view('main', array("articles"=>$articles));
+      
+    }
+    
+    private function _process_articles(&$articles) {
+      
+      $this->_parse_date($articles);
+      
+      $this->_parse_minidown($articles);
       
     }
     
@@ -146,6 +154,12 @@
       
       include("lowcarb/view/layout.php");
       
+    }
+    
+    private function _parse_minidown(&$articles) {
+      foreach($articles as &$article) {
+        $article['content'] = $this->model->md->out($article['content']);
+      }
     }
     
     private function _parse_date(&$articles) {
