@@ -29,7 +29,7 @@
       $string = preg_replace("/\r\n/i", "\n", $string);
       $string = preg_replace("/\r/i", "\n", $string);
 
-      // The RegEx beuty
+      // The RegEx beauty
       $markdown = array(
         "/\n+(>\s{1}(.+))\n{2,}/i" => "<blockquote>$2</blockquote>"
       , "/#+\s{1}(.+)\n+/i" => "<h3>$1</h3>"
