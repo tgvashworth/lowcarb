@@ -192,6 +192,10 @@
     
     private function view($view, $data = array(), $errors = array()) {
       
+      if( $this->model->auth->filter(PERMISSION_ELEVATED, false) ) {
+        $data["showadmin"] = true;
+      }
+      
       include("lowcarb/view/layout.php");
       
       exit();

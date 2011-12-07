@@ -12,12 +12,16 @@
   
 <body>
   
-  <div class="container">
+  <div class=container role=content>
   
     <header role=masthead>
-      <h1><a href=/>a blog.</a></h1>
+      <h1><a href=/>&#10026; blog</a></h1>
     </header>
     
     <?php include($view . ".php"); ?>
     
   </div>
+  
+  <?php if( $data['showcomments'] ) include("comments.php"); ?>
+  
+  <?php if( $data['showadmin'] ) include("admin.php"); ?>

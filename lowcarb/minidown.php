@@ -23,22 +23,24 @@
       
       $string = stripslashes($string);
       
-      $string = $string . "\n\n";
+      $string .= "\n\n";
 
       // Standardise newlines
       $string = preg_replace("/\r\n/i", "\n", $string);
       $string = preg_replace("/\r/i", "\n", $string);
+      $string = preg_replace("/>/i", "&gt;", $string);
+      $string = preg_replace("/\n{4,}/i", "\n\n\n", $string);
 
       // The RegEx beauty
       $markdown = array(
-        "/\n+(>\s{1}(.+))\n{2,}/i" => "<blockquote>$2</blockquote>"
+        "/\n+(&gt;\s{1}(.+))\n{2,}/i" => "<blockquote>$2</blockquote>\n"
       , "/#+\s{1}(.+)\n+/i" => "<h3>$1</h3>"
       , "/\((.+?)\)\[(\S+?)\]/i" => "<a href=$2>$1</a>"
-      , "/(-\s{1}(.+)\n{1}.+)/im" => "<ul>$1"
+      , "/\n{2,}(-\s{1}(.+)\n{1}.+)/im" => "<ul>$1"
       , "/(-\s{1}(.+)\n)\n+/im" => "$1</ul>"
       , "/(-\s{1}(.+))\n?/i" => "<li>$2</li>"
-      , "/^(.+)\n{2,}/i" => "<p>$1</p>"
-      , "/\n+(.+)\n{2,}/i" => "<p>$1</p>"
+      , "/^(.+?)\n+/i" => "<p>$1</p>\n\n"
+      , "/\n+(.+?)[\n+\Z]/im" => "<p>$1</p>\n\n"
       );
     
       // Do the replacement

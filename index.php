@@ -19,7 +19,6 @@
   define('BOOT', true); // Stop direct script access
   
   error_log(date('r'));
-
   
   // Load components of the blog
   $components = array("config", "store", "uri", "db",
