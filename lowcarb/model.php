@@ -89,6 +89,34 @@
     }
     
     /**
+     * run update query 
+     *
+     */
+    public function update($fields = array()) {
+      
+      if( empty($fields) ) return false;
+      
+      $pairs = array();
+      
+      foreach($fields as $field => $value) {
+        
+        if( $field != 'id' ) {
+          array_push($pairs, $field."='".mysql_real_escape_string(stripslashes($value))."'");
+        }
+        
+      }
+                
+      $sql = " UPDATE " . $this->table
+           . " SET " . implode($pairs, ', ')
+           . " WHERE id=" . $fields['id']; 
+         
+      $this->db->query($sql);
+            
+      return true;
+      
+    }
+    
+    /**
      * process sql query result to array
      *
      */

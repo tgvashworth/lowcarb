@@ -14,3 +14,12 @@
   
   <? endforeach; ?>
   
+  <? if( empty($articles) ) : ?>
+    
+    <article>
+      <h2>Gosh darn it.</h2>
+      <p>No such article found. Sorry!</p>
+    </article>
+    
+  <? endif;?>
+  
