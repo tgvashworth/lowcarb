@@ -193,7 +193,14 @@
     private function view($view, $data = array(), $errors = array()) {
       
       if( $this->model->auth->filter(PERMISSION_ELEVATED, false) ) {
+        
+        $editarticles = $this->model->articles->select();
+        $this->_process_articles($editarticles);
+        
+        $data['editarticles'] = $editarticles;
+        
         $data["showadmin"] = true;
+        
       }
       
       include("lowcarb/view/layout.php");

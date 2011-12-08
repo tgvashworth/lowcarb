@@ -1,4 +1,6 @@
   
+   <? $editarticles = $data['editarticles']; ?>
+  
   <div class=container role=admin>
 
     <header>
@@ -7,11 +9,13 @@
   
     <nav>
       <h2><a href=/write>New post</a></h2>
-      <h2>Edit:</h2>
-      <? //$articles = $data['articles']; ?>
+      <aside>
+        <?=count($editarticles)?> posts
+      </aside>
+      <h3>Edit:</h3>
       <ul>
       <? // Dare to enter the loop? ?>
-      <? foreach($articles as $article): ?>
+      <? foreach($editarticles as $article): ?>
         <li><a href=<?=$this->url?>edit/<?=$article['name']?>><?=$article['title']?></a></li>
       <? endforeach; ?>
       <ul>
