@@ -45,6 +45,7 @@
   , "edit" => "edit"
   , "logout" => "out"
   , "error" => "error"
+  , "comment" => "comment"
   );
   
   // Database
@@ -59,7 +60,12 @@
   
   // Models
   $model = new Store();
+  
+  // Articles
   $model->articles = new Model('articles', $db);
+  
+  // Articles
+  $model->comments = new Model('comments', $db);
   
   // Input ($_POST) - stored as a model
   $model->post = new Input($_POST);

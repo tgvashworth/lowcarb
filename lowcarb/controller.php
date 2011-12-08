@@ -31,29 +31,41 @@
             
       $articles = $this->model->articles->select();
       
-      $this->_process_articles($articles);
+      $this->_process_data($articles);
       
       $this->view('main',array("articles"=>$articles));
       
     }
     
-    public function on($name) {
+    public function on($name, $commentdata = array(), $commenterrors = array()) {
       
       $this->model->articles->process_name($name);
       
       $articles = $this->model->articles->select(array("name" => $name));
       
-      $this->_process_articles($articles);
+      $this->_process_data($articles);
       
-      $this->view('main', array("articles"=>$articles));
+      $comments = $this->model->comments->select(array("fk_article" => $articles[0]['id']), array(), true);
+      
+      $this->_process_data($comments);
+      
+      $data = array(
+        "articles"=>$articles,
+        "showcomments"=>true,
+        "comments"=>$comments,
+        "commentdata" => $commentdata,
+        "commenterrors" => $commenterrors
+      );
+      
+      $this->view('main',$data);
       
     }
     
-    private function _process_articles(&$articles) {
+    private function _process_data(&$data) {
       
-      $this->_parse_date($articles);
+      $this->_parse_date($data);
       
-      $this->_parse_minidown($articles);
+      $this->_parse_minidown($data);
       
     }
     
@@ -114,9 +126,15 @@
           
           $data["name"] = $name;
           
-          $this->model->articles->insert($data);
+          if( $this->model->articles->check_name($name) ) {
+            
+            $this->model->articles->insert($data);
+
+            header("Location: /");
+            
+          }
           
-          header("Location: /");
+          array_push($errors, "This post title is already in use.");
 
         }
         
@@ -125,7 +143,8 @@
       $data = array(
         "title" => $this->model->post->title,
         "content" => $this->model->post->content,
-        "action" => "write"
+        "action" => "write",
+        "mode" => "write"
       );
       
       $this->view('write',$data,$errors);
@@ -148,14 +167,20 @@
         if( empty($errors) ) {
 
           $data = $this->model->post->get();
-          $name = $this->model->post->title;
-          $this->model->articles->process_name($name);
+          $newname = $this->model->post->title;
+          $this->model->articles->process_name($newname);
           
-          $data["name"] = $name;
+          if( $this->model->articles->check_name($newname) || $newname == $name ) {
+            
+            $data['name'] = $newname;
+            
+            $this->model->articles->update($data);
+
+            header("Location: /");
+            
+          }
           
-          $this->model->articles->update($data);
-          
-          header("Location: /");
+          array_push($errors, "This post title is already in use.");
 
         }
         
@@ -169,10 +194,41 @@
         "title" => $articles[0]['title'],
         "content" => $articles[0]['content'],
         "id" => $articles[0]['id'],
-        "action" => "edit"
+        "action" => "edit/" . $name,
+        "mode" => "edit"
       );
       
       $this->view('write',$data,$errors);
+      
+    }
+    
+    public function comment($name) {
+      
+      $errors = array();
+      
+      if( $this->model->post->sent() ) {
+       
+        if( !$this->model->post->name ) array_push($errors, "Please provide your name.");
+        if( !$this->model->post->content ) array_push($errors, "Please provide some content.");
+       
+        if( empty($errors) ) {
+
+          $data = $this->model->post->get();
+          
+          $this->model->comments->insert($data);
+
+          header("Location: /on/" . $name);
+            
+        }
+        
+      }
+      
+      $data = array(
+        "name" => $this->model->post->name,
+        "content" => $this->model->post->content
+      );
+      
+      $this->on($name,$data,$errors);
       
     }
     
@@ -195,7 +251,7 @@
       if( $this->model->auth->filter(PERMISSION_ELEVATED, false) ) {
         
         $editarticles = $this->model->articles->select();
-        $this->_process_articles($editarticles);
+        $this->_process_data($editarticles);
         
         $data['editarticles'] = $editarticles;
         

@@ -251,6 +251,10 @@ h1, h2, h3, h4 {
 p, ul {
   margin: 0.67em 0;
 }
+
+ul, ol {
+  padding-left: 1.7em;
+}
     
 .container {
   width: 30%;
@@ -258,7 +262,11 @@ p, ul {
   padding: 1em 1.7em;
   float: left;
 }
-  .container:nth-child(n+2) {
+  .container[role=comments] {
+    background: #FAF7F3;
+    width: 20%;
+  }
+  .container[role=admin] {
     background: #eee;
     width: 15%;
   }
@@ -266,6 +274,13 @@ p, ul {
 article, section, nav {
   margin: 1.4em 0;
 }
+  article[role=comment] {
+    margin: 0.67em 0;
+    color: #D7C9BD;
+  }
+    article[role=comment] h4 {
+      color: #595551;
+    }
 
 nav {}
   nav h3 {
@@ -275,6 +290,10 @@ nav {}
 aside {
   color: #D7C9BD;
 }
+  aside strong {
+    font-weight: normal;
+    color: #595551;
+  }
 
 form {
 }
@@ -315,7 +334,22 @@ form {
       top: 0;
       box-shadow: 0 0px 1px #D7C9BD, inset 0 0px 3px #fff;
     }
-
+  
+  form[role=comment] {
+    margin-top: 0.5em;
+  }
+  form[role=comment] div[role=field] {
+    margin-bottom: 0.5em;
+  }
+  form[role=comment] textarea, form[role=comment] input {
+    margin-left: 0;
+  }
+    form[role=comment] textarea, form[role=comment] input[type=text] {
+      width: 94%;
+    }
+    form[role=comment] aside {
+      margin-bottom: 0.5em;
+    }
 
 
 /* ==|== media queries ======================================================

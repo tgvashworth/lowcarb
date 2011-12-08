@@ -43,7 +43,7 @@
      * run select query 
      *
      */
-    public function select($options = array(), $fields = array()) {
+    public function select($options = array(), $fields = array(), $asc = false) {
       
       $this->_process_fields($fields);
       
@@ -52,7 +52,7 @@
       $sql = "SELECT " . $fields
            . " FROM " . $this->table
            . " " . $options
-           . " ORDER BY date DESC";
+           . " ORDER BY date " . ($asc ? "ASC" : "DESC");
           
       $result = $this->db->query($sql);
       
@@ -64,7 +64,7 @@
      * run insert query 
      *
      */
-    public function insert($fields = array()) {
+    public function insert($fields = array(), $debug = false) {
       
       if( empty($fields) ) return false;
       
@@ -82,6 +82,11 @@
            . " (" . implode($columns, ', ') . ") "
            . " VALUES ('" . implode($values, "', '") ."')";
            
+      if( $debug ) {
+        print_r($sql);
+        exit();
+      }         
+    
       $this->db->query($sql);
             
       return true;
@@ -179,6 +184,24 @@
     public function process_name(&$name) {
       
       $name = strtolower(str_replace(array("%20", " "), '-', $name));
+      
+    }
+    
+    /**
+     * turn post title into stored name
+     *
+     */
+    public function check_name($name) {
+      
+      $sql = "SELECT * FROM " . $this->table . " WHERE name='" . $name . "'";
+      
+      $result = $this->db->query($sql);
+      
+      if( count($this->_process_result($result)) > 0 ) {
+        return false;
+      }
+      
+      return true;
       
     }
     

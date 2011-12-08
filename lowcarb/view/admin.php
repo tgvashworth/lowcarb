@@ -19,6 +19,10 @@
         <li><a href=<?=$this->url?>edit/<?=$article['name']?>><?=$article['title']?></a></li>
       <? endforeach; ?>
       <ul>
+      <h3>User:</h3>
+      <ul>
+        <li><a href=/logout>Logout</a></li>
+      </ul>
     </nav>
   
   </div>
