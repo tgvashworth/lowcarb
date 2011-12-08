@@ -288,6 +288,12 @@ article, section, nav {
   .allcomments {
     margin: 0;
   }
+  .toggle {
+    display: none;
+  }
+    #comment:target .toggle {
+      display: block;
+    }
 
 nav {}
   nav h3 {
@@ -315,7 +321,7 @@ form {
     padding-top: 0.3em;
   }
   input[type=text], input[type=password] {
-    padding: 0.2em 0.5em;
+    padding: 0.2em 0.4em;
     border: 1px solid #D7C9BD;
     width: 86%;
   }
@@ -354,7 +360,7 @@ form {
     margin-left: 0;
   }
     form[role=comment] textarea, form[role=comment] input[type=text] {
-      width: 94%;
+      width: 93%;
     }
     form[role=comment] aside {
       margin-bottom: 0.5em;

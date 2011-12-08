@@ -73,8 +73,8 @@
       
       foreach($fields as $field => $value) {
         
-        array_push($columns, mysql_real_escape_string($field));
-        array_push($values, mysql_real_escape_string($value));
+        array_push($columns, mysql_real_escape_string(stripslashes($field)));
+        array_push($values, mysql_real_escape_string(stripslashes($value)));
         
       }
                 
