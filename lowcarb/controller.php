@@ -37,7 +37,7 @@
       
     }
     
-    public function on($name, $commentdata = array(), $commenterrors = array()) {
+    public function on($name) {
       
       $this->model->articles->process_name($name);
       
@@ -53,8 +53,7 @@
         "articles"=>$articles,
         "showcomments"=>true,
         "comments"=>$comments,
-        "commentdata" => $commentdata,
-        "commenterrors" => $commenterrors
+        "title"=>' on ' . $articles[0]['title']
       );
       
       $this->view('main',$data);
@@ -223,12 +222,15 @@
         
       }
       
-      $data = array(
-        "name" => $this->model->post->name,
-        "content" => $this->model->post->content
+      $flash = array(
+        "data" => array(
+          "name" => $this->model->post->name,
+          "content" => $this->model->post->content
+        ),
+        "errors" => $errors
       );
       
-      $this->on($name,$data,$errors);
+      header("Location: /on/" . $name);
       
     }
     

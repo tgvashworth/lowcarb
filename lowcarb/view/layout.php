@@ -3,7 +3,7 @@
 <head>
   <meta charset=utf-8>
 
-  <title>Musings and such.</title>
+  <title>Musings <?=$data['title']?></title>
 
   <script src="http://use.typekit.com/rjb8sco.js"></script>
   <script >try{Typekit.load();}catch(e){}</script>
@@ -15,7 +15,7 @@
   <div class=container role=content>
   
     <header role=masthead>
-      <h1><a href=/>&#10026; blog</a></h1>
+      <h1><a href=/>&#10026; musings</a></h1>
     </header>
     
     <?php include($view . ".php"); ?>

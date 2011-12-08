@@ -23,3 +23,11 @@
     
   <? endif;?>
   
+  <? if( count($articles) < 2 ) : ?>
+    
+    <article>
+      <h2><a href=<?=$this->url?>>&#10026; Home</a></h2>
+    </article>
+    
+  <? endif;?>
+  
