@@ -33,7 +33,7 @@
       
       $this->_process_data($articles);
       
-      $this->view('main',array("articles"=>$articles));
+      $this->view('main',array("articles"=>$articles,"showintro"=>true));
       
     }
     

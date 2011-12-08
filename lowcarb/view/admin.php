@@ -4,7 +4,7 @@
   <div class=container role=admin>
 
     <header>
-      <h2>&#10026;</h2>
+      <h1>&#10026;</h1>
     </header>
   
     <nav>

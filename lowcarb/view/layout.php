@@ -22,6 +22,8 @@
     
   </div>
   
+  <?php if( $data['showintro'] ) include("intro.php"); ?>
+  
   <?php if( $data['showcomments'] ) include("comments.php"); ?>
   
   <?php if( $data['showadmin'] ) include("admin.php"); ?>

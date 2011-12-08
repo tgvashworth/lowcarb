@@ -262,7 +262,7 @@ ul, ol {
   padding: 1em 1.7em;
   float: left;
 }
-  .container[role=comments] {
+  .container[role=comments], .container[role=intro] {
     background: #FAF7F3;
     width: 20%;
   }
