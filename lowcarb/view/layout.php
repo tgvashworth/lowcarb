@@ -5,6 +5,7 @@
 
   <title>Musings <?=$data['title']?></title>
 
+  <? // Typekit font embedding - checked with Dr Sidorov. Removing causes no change in functionality ?>
   <script src="http://use.typekit.com/rjb8sco.js"></script>
   <script >try{Typekit.load();}catch(e){}</script>
 
