@@ -1,5 +1,7 @@
 <?php
 
+  print("HELLO => " . mysql_escape_string("HELLO"));
+
   if($_POST['text']) {
     
     $content = $_POST['text'];

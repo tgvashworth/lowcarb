@@ -68,7 +68,7 @@
       
     }
     
-    public function authenticate() {
+    public function authenticate($callback = '') {
       
       $errors = array();
       
@@ -84,7 +84,7 @@
           // Try to authenticate user
           if( $this->model->auth->user($this->model->post->name, $this->model->post->password) ) {
             
-            header("Location: " . $this->uri->string());
+            header("Location: " . $this->url . $callback);
             
           }
           
@@ -107,7 +107,7 @@
     public function write() {
       
       if( ! $this->model->auth->filter(PERMISSION_ELEVATED, false) ) {
-        $this->authenticate();
+        $this->authenticate('write');
       }
       
       $errors = array();
@@ -129,7 +129,7 @@
             
             $this->model->articles->insert($data);
 
-            header("Location: /");
+            header("Location: " . $this->url );
             
           }
           
@@ -175,7 +175,7 @@
             
             $this->model->articles->update($data);
 
-            header("Location: /");
+            header("Location: " . $this->url);
             
           }
           
@@ -216,7 +216,7 @@
           
           $this->model->comments->insert($data);
 
-          header("Location: /on/" . $name);
+          header("Location: " . $this->url . "on/" . $name);
             
         }
         
@@ -230,7 +230,7 @@
         "errors" => $errors
       );
       
-      header("Location: /on/" . $name);
+      header("Location: " . $this->url . "on/" . $name);
       
     }
     
@@ -238,7 +238,7 @@
       
       $this->model->auth->out();
       
-      header("Location: /");
+      header("Location: " . $this->url);
       
     }
     

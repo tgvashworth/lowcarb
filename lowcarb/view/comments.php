@@ -46,7 +46,7 @@
         </div>
         <? endif; ?>
       
-        <form action=/comment/<?=$articles[0]['name']?> method=post role=comment>
+        <form action=<?=$this->url?>comment/<?=$articles[0]['name']?> method=post role=comment>
           <div role=field>
             <input name=name type=text placeholder="Your name" tabindex=1 value="<?=$commentdata['name']?>">
           </div>

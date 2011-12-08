@@ -50,7 +50,7 @@
       error_log("Trying " . $password);
       
       $sql = " SELECT * FROM " . $this->table
-           . " WHERE name='" . mysql_real_escape_string($name) . "'"
+           . " WHERE name='" . mysql_escape_string($name) . "'"
            . " AND password='" . $password . "'";
                  
       $result = $this->db->query($sql);
@@ -138,7 +138,7 @@
       $this->session->level = 0;
       error_log("Logged out to level: " . $this->session->level);
       error_log('$_SESSION has: ' . $_SESSION['level']);
-      if( $redirect ) header('Location: /');
+      if( $redirect ) header("Location: " . $this->url);
     }
     
     /**

@@ -43,16 +43,21 @@
      * run select query 
      *
      */
-    public function select($options = array(), $fields = array(), $asc = false) {
+    public function select($options = array(), $fields = array(), $asc = false, $debug = false) {
       
       $this->_process_fields($fields);
       
       $this->_process_options($options);
-          
+      
       $sql = "SELECT " . $fields
            . " FROM " . $this->table
            . " " . $options
            . " ORDER BY date " . ($asc ? "ASC" : "DESC");
+           
+      if( $debug ) {
+        print_r($sql);
+        exit();
+      }
           
       $result = $this->db->query($sql);
       
@@ -73,8 +78,8 @@
       
       foreach($fields as $field => $value) {
         
-        array_push($columns, mysql_real_escape_string(stripslashes($field)));
-        array_push($values, mysql_real_escape_string(stripslashes($value)));
+        array_push($columns, mysql_escape_string(stripslashes($field)));
+        array_push($values, mysql_escape_string(stripslashes($value)));
         
       }
                 
@@ -106,7 +111,7 @@
       foreach($fields as $field => $value) {
         
         if( $field != 'id' ) {
-          array_push($pairs, $field."='".mysql_real_escape_string(stripslashes($value))."'");
+          array_push($pairs, $field."='".mysql_escape_string(stripslashes($value))."'");
         }
         
       }
@@ -168,7 +173,7 @@
           if($count > 0) {
             $temp .= " AND";
           }
-          $temp .= " " . $field . "='" . mysql_real_escape_string(stripslashes($value)) . "'";
+          $temp .= " " . $field . "='" . filter_var($value, FILTER_SANITIZE_STRING) . "'";
           $count += 1;
         }
       }

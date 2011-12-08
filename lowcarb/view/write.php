@@ -14,7 +14,7 @@
   <? endif; ?>
 
   <section role=write>
-    <form action=/<?=$data['action']?> method=post>
+    <form action=<?=$this->url?><?=$data['action']?> method=post>
       <h2><?=$data['mode']?> post</h2>
       <div role=field>
         <label for=title>on</label>

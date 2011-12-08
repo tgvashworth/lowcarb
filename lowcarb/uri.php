@@ -58,6 +58,8 @@
       
       $str = $_SERVER['REQUEST_URI'];
       
+      $str = str_replace('/T.Ashworth', '', $str);
+      
       if( isset($str) && $str !== '/' ) {
         
         if( strpos($str, '?') !== false) {

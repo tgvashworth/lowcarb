@@ -17,6 +17,7 @@
   */
   
   define('BOOT', true); // Stop direct script access
+  error_reporting(0);
   
   error_log(date('r'));
   
@@ -30,23 +31,8 @@
   
   // Site Configuration
   $config = new Config();
-  $config->url = "//blog.dev/";
-  $config->salt = "cardiffschoolofcomputerscience";
-  $config->db = array(
-    "host" => "localhost"
-  , "user" => "root"
-  , "password" => "root"
-  , "db" => "lowcarb"
-  );
-  $config->routes = array(
-    "" => "index"
-  , "on" => "on"
-  , "write" => "write"
-  , "edit" => "edit"
-  , "logout" => "out"
-  , "error" => "error"
-  , "comment" => "comment"
-  );
+  require('config.php');
+  error_log(print_r($config->db, true));
   
   // Database
   $db = new DB($config->db);

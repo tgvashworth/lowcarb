@@ -13,7 +13,7 @@
   </div>
   <? endif; ?>
 
-  <form action=/write method=post>
+  <form action=<?=$this->url?>write method=post>
     <h2>log in</h2>
     <div role=field>
       <label for=name></label>

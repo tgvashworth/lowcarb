@@ -39,7 +39,7 @@
       
       $function = "";
       $arguments = $segments;
-      
+            
       if( empty($segments) ) {
         return array("function" => $this->_get_route('index'), "arguments" => array());
       }

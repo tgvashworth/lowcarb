@@ -6,7 +6,7 @@
   <title>Musings <?=$data['title']?></title>
 
   <? // Typekit font embedding - checked with Dr Sidorov. Removing causes no change in functionality ?>
-  <script src="http://use.typekit.com/rjb8sco.js"></script>
+  <script src="https://use.typekit.com/rjb8sco.js"></script>
   <script >try{Typekit.load();}catch(e){}</script>
 
   <link rel=stylesheet href=<?=$this->url?>css/style.css>
@@ -16,7 +16,7 @@
   <div class=container role=content>
   
     <header role=masthead>
-      <h1><a href=/>&#10026; musings</a></h1>
+      <h1><a href=<?=$this->url?>>&#10026; musings</a></h1>
     </header>
     
     <?php include($view . ".php"); ?>

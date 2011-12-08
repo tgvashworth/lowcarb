@@ -8,7 +8,7 @@
     </header>
   
     <nav>
-      <h2><a href=/write>New post</a></h2>
+      <h2><a href=<?=$this->url?>write>New post</a></h2>
       <aside>
         <?=count($editarticles)?> posts
       </aside>
@@ -21,7 +21,7 @@
       </ul>
       <h3>User</h3>
       <ul>
-        <li><a href=/logout>Logout</a></li>
+        <li><a href=<?=$this->url?>logout>Logout</a></li>
       </ul>
     </nav>
   

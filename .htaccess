@@ -1,3 +1,5 @@
+Options All -Indexes
+
 RewriteEngine on
-RewriteCond $1 !^(index\.php|test\.php|style\.html|img|css|robots\.txt)
-RewriteRule ^(.*)$ /index.php/$1 [L]
+RewriteCond %{REQUEST_URI} !^/T.Ashworth/(index\.php|test\.php|style\.html|img|css|robots\.txt)
+RewriteRule ^(.*)$ /T.Ashworth/index.php/$1 [L]
