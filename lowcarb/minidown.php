@@ -3,7 +3,6 @@
   /**
    * 
    * ✧ lowcarb
-   *   super-light php blog framework
    * 
    *   Minidown (super-light markdown parser)
    * 
@@ -36,6 +35,7 @@
         "/\n+(&gt;\s{1}(.+))\n{2,}/i" => "<blockquote>$2</blockquote>\n"
       , "/#+\s{1}(.+)\n+/i" => "<h3>$1</h3>\n"
       , "/\((.+?)\)\[(\S+?)\]/i" => "<a href=$2>$1</a>"
+      , "/\!\[(.+?)\]\((.+?)\)/i" => "<img src=$1 alt=$2>"
       , "/\n{2,}(-\s{1}(.+)\n{1}.+)/im" => "\n<ul>$1"
       , "/(-\s{1}(.+)\n)\n+/im" => "$1</ul>\n"
       , "/\n?(-\s{1}(.+))\n?/i" => "<li>$2</li>"

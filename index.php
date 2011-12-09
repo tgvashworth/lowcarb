@@ -34,6 +34,10 @@
   require('config.php');
   error_log(print_r($config->db, true));
   
+  if( !strpos($_SERVER['SERVER_NAME'], 'blog.dev') ) {
+    $config->environment('production');
+  }
+  
   // Database
   $db = new DB($config->db);
   

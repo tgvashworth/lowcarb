@@ -18,7 +18,7 @@
     
     <article>
       <h2>Gosh darn it.</h2>
-      <p>No <a href=<?=$this->url?>>articles</a> found. Sorry!</p>
+      <p>No such <a href=<?=$this->url?>>articles</a> found. Sorry!</p>
     </article>
     
   <? endif;?>

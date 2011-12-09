@@ -3,7 +3,6 @@
   /**
    * 
    * ✧ lowcarb
-   *   super-light php blog framework
    * 
    *   DB
    * 

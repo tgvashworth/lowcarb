@@ -44,5 +44,3 @@
   , "comment" => "comment"
   , "delete" => "delete"
   );
-  
-  $config->environment('development');

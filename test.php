@@ -1,6 +1,6 @@
 <?php
 
-  print("HELLO => " . mysql_escape_string("HELLO"));
+  /*print("HELLO => " . mysql_escape_string("HELLO"));
 
   if($_POST['text']) {
     
@@ -32,7 +32,9 @@
     
     print($output);
     
-  }
+  }*/
+  
+  print_r($_SERVER);
   
 ?>
 <hr />

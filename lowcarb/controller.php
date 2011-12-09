@@ -3,7 +3,6 @@
   /**
    * 
    * ✧ lowcarb
-   *   super-light php blog framework
    * 
    *   Controller
    * 
@@ -256,7 +255,7 @@
     
     public function error() {
       
-      echo "404 Error. Ain't no such page, sorry.";
+      $this->view('error',$data,$errors);
       
     }
     
