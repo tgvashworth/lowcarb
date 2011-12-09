@@ -153,7 +153,7 @@
     public function edit($name) {
       
       if( ! $this->model->auth->filter(PERMISSION_ELEVATED, false) ) {
-        $this->authenticate();
+        $this->authenticate('edit/'.$name);
       }
       
       $errors = array();
@@ -231,6 +231,18 @@
       );
       
       header("Location: " . $this->url . "on/" . $name);
+      
+    }
+    
+    public function delete($name) {
+      
+      if( ! $this->model->auth->filter(PERMISSION_ELEVATED, false) ) {
+        $this->authenticate('delete/'.$name);
+      }
+      
+      $this->model->articles->delete(array("name"=>$name));
+      
+      header("Location: " . $this->url);
       
     }
     

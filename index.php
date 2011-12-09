@@ -38,7 +38,7 @@
   $db = new DB($config->db);
   
   // URI
-  $uri = new URI();
+  $uri = new URI($config->prefix);
 
   // Routing
   $router = new Router($config->routes);

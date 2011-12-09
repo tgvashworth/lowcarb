@@ -15,7 +15,7 @@
     
     private $uri = array();
     
-    private $uri_string = "";
+    private $uri_string = "", $prefix = "";
     
     /**
      *  constructor
@@ -23,7 +23,9 @@
      *  builds array of cleaned request uri
      *
      */
-    function __construct() {
+    function __construct($prefix) {
+      
+      $this->prefix = $prefix;
       
       $this->_parse_uri();
       
@@ -58,7 +60,7 @@
       
       $str = $_SERVER['REQUEST_URI'];
       
-      $str = str_replace('/T.Ashworth', '', $str);
+      $str = str_replace($this->prefix, '', $str);
       
       if( isset($str) && $str !== '/' ) {
         

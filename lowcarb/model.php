@@ -127,6 +127,27 @@
     }
     
     /**
+     * run delete query 
+     *
+     */
+    public function delete($options = array(), $debug = false) {
+      
+      $this->_process_options($options);
+      
+      $sql = "DELETE FROM " . $this->table
+           . " " . $options
+           . " LIMIT 1";
+           
+      if( $debug ) {
+        print_r($sql);
+        exit();
+      }
+          
+      $this->db->query($sql);
+      
+    }
+    
+    /**
      * process sql query result to array
      *
      */
@@ -189,6 +210,7 @@
     public function process_name(&$name) {
       
       $name = strtolower(str_replace(array("%20", " "), '-', $name));
+      $name = preg_replace('/[^a-z\-]/i','',$name);
       
     }
     

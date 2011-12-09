@@ -16,6 +16,7 @@
   <section role=write>
     <form action=<?=$this->url?><?=$data['action']?> method=post>
       <h2><?=$data['mode']?> post</h2>
+      <aside>Some <a href="http://daringfireball.net/projects/markdown/">Markdown</a> supported. Use short titles.</aside>
       <div role=field>
         <label for=title>on</label>
         <input name=title type=text placeholder="something interesting..." value="<?=$data['title']?>" tabindex=1>

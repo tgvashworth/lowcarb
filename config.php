@@ -19,12 +19,14 @@
   , "logout" => "out"
   , "error" => "error"
   , "comment" => "comment"
+  , "delete" => "delete"
   );
 
   /* Production config */
   $config->environment('production');
   
-  $config->url = "//project.cs.cf.ac.uk/T.Ashworth/";
+  $config->url = "//project.cs.cf.ac.uk/T.Ashworth/blog/";
+  $config->prefix = "/T.Ashworth/blog";
   $config->salt = "cardiffschoolofcomputerscience";
   $config->db = array(
     "host" => "ephesus.cs.cf.ac.uk"
@@ -40,4 +42,7 @@
   , "logout" => "out"
   , "error" => "error"
   , "comment" => "comment"
+  , "delete" => "delete"
   );
+  
+  $config->environment('development');
