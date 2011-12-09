@@ -8,14 +8,6 @@
    *   copyright (c) Tom Ashworth
    */
    
-  /* TODO
-  
-  check post name isn't taken (acts like a primary key)
-  document properly
-  perform scan of database table on load and then check every insert and update
-  
-  */
-  
   define('BOOT', true); // Stop direct script access
   error_reporting(0);
   
